@@ -1,5 +1,6 @@
 {
-  "name": "test1",
+  "name": "test1idotest",
   "version": "1.0.1",
-  "private": false
+  "private": false,
+  "gitHead": "dad4f58ff3da1bac50c635cf4c749160819601fb"
 }
