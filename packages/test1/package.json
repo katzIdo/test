@@ -2,5 +2,12 @@
   "name": "test1idotest",
   "version": "1.0.5",
   "private": false,
-  "gitHead": "42a06c54a132684b0a86ca442171ce927199d27d"
+  "gitHead": "42a06c54a132684b0a86ca442171ce927199d27d",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^24.5.0"
+  }
 }
