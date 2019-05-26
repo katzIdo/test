@@ -1,5 +1,5 @@
 {
-  "name": "@publish_tes2/test",
+  "name": "@publish_test/test",
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
@@ -9,6 +9,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "start": "http-server -a localhost -p 1111"
+  },
   "dependencies": {
     "lerna": "^3.13.1"
   }
