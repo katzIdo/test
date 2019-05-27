@@ -10,7 +10,8 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "http-server -a localhost -p 1111"
+    "start": "http-server -a localhost -p 1111",
+    "build:example" : "lerna run build:example"
   },
   "dependencies": {
     "lerna": "^3.13.1"

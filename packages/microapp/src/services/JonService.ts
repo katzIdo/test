@@ -17,7 +17,8 @@ Microservices.create({
   services: [{
     definition: JonServiceDefinition,
     reference: { getJon }
-  }]
+  }],
+  seedAddress: 'reactivePandas.myTestProject'
 });
 
 export { JonServiceDefinition }
