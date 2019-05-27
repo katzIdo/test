@@ -1,8 +1,8 @@
 {
-  "name": "randomapp",
+  "name": "team_yellow",
   "version": "1.0.0",
   "scripts": {
-    "build:example": "parcel build -o build ./src/index.tsx --no-minify --global randomNumberServiceDefinition"
+    "build:example": "parcel build -o build ./src/index.tsx --no-minify --global teamYellow"
   },
   "dependencies": {
     "@scalecube/scalecube-microservice": "next",

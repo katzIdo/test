@@ -7,13 +7,21 @@ export class RandomNumber extends React.Component {
   getRandomNumber: Observable<any>;
   subscription: Unsubscribable;
 
-  constructor(props) {
+  isReady: boolean;
+
+  constructor(props: any) {
     super(props);
 
     // @ts-ignore
-    const {RandomNumberServiceDefinition} = window.randomNumberServiceDefinition;
-    const numberProxy = props.ms.createProxy({ serviceDefinition: RandomNumberServiceDefinition });
-    this.getRandomNumber = numberProxy.getRandomNumber();
+    const { RandomNumberServiceDefinition, isReadyFlag } = window.teamYellow;
+    this.isReady = isReadyFlag;
+
+    if (isReadyFlag) {
+      const numberProxy = props.ms.createProxy({ serviceDefinition: RandomNumberServiceDefinition });
+      this.getRandomNumber = numberProxy.getRandomNumber();
+    } else {
+      console.log('Team Yellow not ready yet.. ');
+    }
   }
 
   state = {
@@ -21,10 +29,11 @@ export class RandomNumber extends React.Component {
   };
 
   componentDidMount() {
-    this.subscription = this.getRandomNumber.subscribe(value =>
-      // @ts-ignore
-      this.setState({ randomNumber: value }),
-    );
+    this.isReady ?
+      this.subscription = this.getRandomNumber.subscribe(value =>
+        // @ts-ignore
+        this.setState({ randomNumber: value }),
+      ) : null;
   }
 
   componentWillUnmount() {
@@ -33,9 +42,13 @@ export class RandomNumber extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.randomNumber}
-      </div>
+      this.isReady ?
+        <div>
+          <div>Thank you Team-Yellow, I am able to generate numbers..</div>
+          <div>You are my heros.</div>
+
+          <div>{this.state.randomNumber}</div>
+        </div> : <div>Oh no, where are my services..?</div>
     );
   }
 }
