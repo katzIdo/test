@@ -1,1 +1,1 @@
-export { RandomNumberServiceDefinition, isReadyFlag } from './services/randomNumberService';
+export { RandomNumberServiceDefinition } from './services/randomNumberService';

@@ -16,7 +16,6 @@ const RandomNumberServiceDefinition = {
     getRandomNumber: {
       asyncModel: ASYNC_MODEL_TYPES.REQUEST_STREAM
     },
-
   }
 };
 
@@ -25,7 +24,7 @@ try {
     services: [{
       definition: RandomNumberServiceDefinition,
       reference: {
-        // getRandomNumber,
+        getRandomNumber,
       }
     }],
     address: {

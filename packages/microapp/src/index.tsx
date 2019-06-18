@@ -9,6 +9,12 @@ const ms = Microservices.create({
     path: 'defaultPath',
     port: 8000,
     protocol: 'pm'
+  },
+  address: {
+    host: 'defaultHost',
+    path: 'defaultPath',
+    port: 8001,
+    protocol: 'pm'
   }
 });
 

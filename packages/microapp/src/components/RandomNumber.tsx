@@ -1,47 +1,49 @@
 import { Observable } from 'rxjs';
 import { Unsubscribable } from 'rxjs/src/internal/types';
 import React from 'react';
+import { RandomNumberServiceDefinition } from '../definitions/randomServiceDefinition';
+import { getScript } from "../utils/getScript";
 
 export class RandomNumber extends React.Component {
 
   getRandomNumber: Observable<any>;
   subscription: Unsubscribable;
 
-  constructor(props: any) {
-    super(props);
-
-    // @ts-ignore
-    const { RandomNumberServiceDefinition } = window.teamYellow;
-
-
-    const { teamYellowService } = props.ms.createProxies({
-      proxies: [{
-        serviceDefinition: RandomNumberServiceDefinition,
-        proxyName: 'teamYellowService'
-      }],
-      isAsync: true
-    });
-
-    teamYellowService.then(({ proxy: numberProxy }) => {
-      this.getRandomNumber = numberProxy.getRandomNumber();
-      this.subscription = this.getRandomNumber.subscribe(value =>
-        // @ts-ignore
-        this.setState({ randomNumber: value }),
-      )
-    });
-
-    // const numberProxy = props.ms.createProxy({serviceDefinition: RandomNumberServiceDefinition});
-    //
-    // this.getRandomNumber = numberProxy.getRandomNumber();
-    // this.subscription = this.getRandomNumber.subscribe(value =>
-    //   // @ts-ignore
-    //   this.setState({ randomNumber: value }),
-    // )
-  }
-
   state = {
     randomNumber: 0
   };
+
+  componentDidMount() {
+    // @ts-ignore
+    const { ms } = this.props;
+
+    getScript('https://unpkg.com/team_yellow@1.0.2/dist/build.js').then(() => {
+      const { teamYellowService } = ms.createProxies({
+        proxies: [{
+          serviceDefinition: RandomNumberServiceDefinition,
+          proxyName: 'teamYellowService'
+        }],
+        isAsync: true
+      });
+
+      teamYellowService.then(({ proxy: numberProxy }) => {
+        this.getRandomNumber = numberProxy.getRandomNumber();
+        this.subscription = this.getRandomNumber.subscribe(value =>
+          // @ts-ignore
+          this.setState({ randomNumber: value }),
+        )
+      });
+
+      // const numberProxy = props.ms.createProxy({serviceDefinition: RandomNumberServiceDefinition});
+      //
+      // this.getRandomNumber = numberProxy.getRandomNumber();
+      // this.subscription = this.getRandomNumber.subscribe(value =>
+      //   // @ts-ignore
+      //   this.setState({ randomNumber: value }),
+      // )
+      // });
+    });
+  }
 
   componentWillUnmount() {
     this.subscription.unsubscribe();
