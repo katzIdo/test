@@ -3,7 +3,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { RandomNumber } from './components/RandomNumber';
 
-const ms = Microservices.create({ seedAddress: 'reactivePandas.myTestProject' });
+const ms = Microservices.create({
+  seedAddress: {
+    host: 'defaultHost',
+    path: 'defaultPath',
+    port: 8000,
+    protocol: 'pm'
+  }
+});
 
 // @ts-ignore
 const teamYellowRandomNumbers = () => <RandomNumber ms={ms}/>;

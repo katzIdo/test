@@ -1,11 +1,9 @@
 import { ASYNC_MODEL_TYPES, Microservices } from '@scalecube/scalecube-microservice';
 import { interval, Observable } from 'rxjs';
 
-let isReadyFlag = false;
-
 const getRandomNumber = () => {
   return new Observable(obs => {
-    interval(1000).subscribe(()=>{
+    interval(1000).subscribe(() => {
       obs.next(Math.floor(Math.random() * 100))
     })
   })
@@ -30,13 +28,22 @@ try {
         // getRandomNumber,
       }
     }],
-    seedAddress: 'reactivePandas.myTestProject'
+    address: {
+      host: 'defaultHost',
+      path: 'defaultPath',
+      port: 8080,
+      protocol: 'pm'
+    },
+    seedAddress: {
+      host: 'defaultHost',
+      path: 'defaultPath',
+      port: 8000,
+      protocol: 'pm'
+    }
   });
-
-  isReadyFlag = true;
 
 } catch (e) {
 }
 
 
-export { RandomNumberServiceDefinition, isReadyFlag }
+export { RandomNumberServiceDefinition }
